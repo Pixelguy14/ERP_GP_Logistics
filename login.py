@@ -1,6 +1,7 @@
 # cd Documents/DICIS_8vo_2025/Topicos_Selectos_Sistemas_Informacion/Python/
 # python3 -m venv ./
 # source /home/pixel/Documents/DICIS_8vo_2025/Topicos_Selectos_Sistemas_Informacion/Python/bin/activate
+# source /home/pixelguy14/Documentos/DICIS_8vo/Topicos_selectos_sistemas_de_informacion/ERP_GP_Logistics/bin/activate
 import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
                             QLabel, QLineEdit, QPushButton, QMessageBox, QCheckBox, QDialog)
@@ -10,8 +11,9 @@ import mysql.connector
 from dotenv import load_dotenv
 import os
 from finanzas import *
-from gestion import *
 from recursoshumanos import *
+from logistica import *
+from gestion import *
 
 class LoginWindow(QWidget):
     def __init__(self):
@@ -198,6 +200,8 @@ class LoginWindow(QWidget):
                     self.RRHH_window.show()
                 elif resultado["usu_mod"] == "Logistica":
                     print("interfaz de Logistica")
+                    self.Logistica_window = LogisticaWindow(self, usu_id)
+                    self.Logistica_window.show()
                 elif resultado["usu_mod"] == "Compras":
                     print("interfaz de Compras")
                 elif resultado["usu_mod"] == "Ventas":

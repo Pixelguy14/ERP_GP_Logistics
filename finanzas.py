@@ -92,7 +92,7 @@ class FinanzasDialog(QDialog):
         self.setMinimumWidth(400)
         self.setStyleSheet("""
             QDialog {
-                background-color: #f8f8f8;
+                background-color: #f0f0f0;
                 font-family: Arial;
             }
             QLabel {
@@ -107,17 +107,17 @@ class FinanzasDialog(QDialog):
             }
             QPushButton {
                 padding: 8px 16px;
-                background-color: #c1272d;
+                background-color: #94a7cb;
                 color: white;
                 border: none;
                 border-radius: 4px;
                 font-weight: bold;
             }
             QPushButton:hover {
-                background-color: #a01c21;
+                background-color: #3a68be;
             }
             QPushButton:pressed {
-                background-color: #7d161a;
+                background-color: #1f3868;
             }
             QPushButton[text="Cancelar"] {
                 background-color: #6c757d;
@@ -256,7 +256,7 @@ class FinanzasWindow(QMainWindow):
         
         self.setStyleSheet("""
             QMainWindow {
-                background-color: #f0f0f0;
+                background-color: #3156A1;
                 font-family: Arial;
             }
             QTableView {
@@ -264,7 +264,7 @@ class FinanzasWindow(QMainWindow):
                 border-radius: 4px;
                 background-color: white;
                 alternate-background-color: #f9f9f9;
-                selection-background-color: #c1272d;
+                selection-background-color: #94a7cb;
                 selection-color: white;
             }
             QTableView::item {
@@ -272,7 +272,7 @@ class FinanzasWindow(QMainWindow):
                 border-bottom: 1px solid #eee;
             }
             QHeaderView::section {
-                background-color: #c1272d;
+                background-color: #94a7cb;
                 color: white;
                 padding: 6px;
                 border: none;
@@ -280,26 +280,26 @@ class FinanzasWindow(QMainWindow):
             }
             QPushButton {
                 padding: 8px 16px;
-                background-color: #c1272d;
+                background-color: #94a7cb;
                 color: white;
                 border: none;
                 border-radius: 4px;
                 font-weight: bold;
             }
             QPushButton:hover {
-                background-color: #a01c21;
+                background-color: #3a68be;
             }
             QPushButton:pressed {
-                background-color: #7d161a;
+                background-color: #1f3868;
             }
             QPushButton#deleteBtn {
                 background-color: #dc3545;
             }
             QPushButton#deleteBtn:hover {
-                background-color: #c82333;
+                background-color: #9c1b28;
             }
             QToolBar {
-                background-color: #c1272d;
+                background-color: #94a7cb;
                 spacing: 10px;
                 padding: 5px;
                 border: none;
@@ -353,7 +353,7 @@ class FinanzasWindow(QMainWindow):
         self.btn_finanzas = QPushButton("Gestión de Finanzas")
         self.btn_finanzas.setCursor(Qt.PointingHandCursor)
         #self.btn_finanzas.clicked.connect(lambda: (self.stacked_widget.setCurrentIndex(0),self.loadDataMain))
-        self.btn_finanzas.clicked.connect(lambda: (self.stacked_widget.setCurrentIndex(0), self.loadDataMain()))
+        self.btn_finanzas.clicked.connect(lambda: (self.stacked_widget.setCurrentIndex(0), splitter.setSizes([450, 550]), self.loadDataMain()))
         self.toolbar.addWidget(self.btn_finanzas)
 
         self.btn_consultas = QPushButton("Reportes Financieros")

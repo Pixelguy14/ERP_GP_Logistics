@@ -133,7 +133,7 @@ class GestionWindow(QMainWindow):
         # Estilo de la aplicación
         self.setStyleSheet("""
             QMainWindow {
-                background-color: #f0f0f0;
+                background-color: #3156A1;
                 font-family: Arial;
             }
             QTableView {
@@ -141,7 +141,7 @@ class GestionWindow(QMainWindow):
                 border-radius: 4px;
                 background-color: white;
                 alternate-background-color: #f9f9f9;
-                selection-background-color: #c1272d;
+                selection-background-color: #94a7cb;
                 selection-color: white;
             }
             QTableView::item {
@@ -149,7 +149,7 @@ class GestionWindow(QMainWindow):
                 border-bottom: 1px solid #eee;
             }
             QHeaderView::section {
-                background-color: #c1272d;
+                background-color: #94a7cb;
                 color: white;
                 padding: 6px;
                 border: none;
@@ -157,24 +157,32 @@ class GestionWindow(QMainWindow):
             }
             QPushButton {
                 padding: 8px 16px;
-                background-color: #c1272d;
+                background-color: #94a7cb;
                 color: white;
                 border: none;
                 border-radius: 4px;
                 font-weight: bold;
             }
             QPushButton:hover {
-                background-color: #a01c21;
+                background-color: #3a68be;
             }
             QPushButton:pressed {
-                background-color: #7d161a;
+                background-color: #1f3868;
             }
+            /* Conservamos el estilo especial para el botón activo; se ha modificado el color para encajar con la paleta */
             QPushButton#activeModule {
-                background-color: #7d161a;
+                background-color: #1f3868;
                 border-bottom: 3px solid white;
             }
+            /* Estilo especial para botones de borrar (del segundo estilo) */
+            QPushButton#deleteBtn {
+                background-color: #dc3545;
+            }
+            QPushButton#deleteBtn:hover {
+                background-color: #9c1b28;
+            }
             QToolBar {
-                background-color: #c1272d;
+                background-color: #94a7cb;
                 spacing: 10px;
                 padding: 5px;
                 border: none;
@@ -200,19 +208,22 @@ class GestionWindow(QMainWindow):
                 border: 1px solid #ddd;
                 border-radius: 4px;
             }
+            /* Manteniendo la configuración de los ComboBox y DateEdit del primer estilo */
             QComboBox, QDateEdit {
                 padding: 6px;
                 border: 1px solid #ddd;
                 border-radius: 4px;
                 background-color: white;
             }
+            /* Se ajusta el color del título del módulo para coincidir con la paleta azul */
             QLabel#moduleTitle {
                 font-size: 20px;
                 font-weight: bold;
-                color: #c1272d;
+                color: #94a7cb;
                 padding: 10px 0;
             }
         """)
+
         
         # Toolbar superior
         self.toolbar = QToolBar("Main Toolbar")
@@ -238,32 +249,32 @@ class GestionWindow(QMainWindow):
         # Botones de módulos
         self.btn_finanzas = QPushButton("Finanzas")
         self.btn_finanzas.setCursor(Qt.PointingHandCursor)
-        self.btn_finanzas.clicked.connect(lambda: self.cambiarModulo(0, self.btn_finanzas))
+        self.btn_finanzas.clicked.connect(lambda: (self.splitter.setSizes([450, 550]), self.cambiarModulo(0, self.btn_finanzas)))
         self.toolbar.addWidget(self.btn_finanzas)
         
         self.btn_rrhh = QPushButton("Recursos Humanos")
         self.btn_rrhh.setCursor(Qt.PointingHandCursor)
-        self.btn_rrhh.clicked.connect(lambda: self.cambiarModulo(1, self.btn_rrhh))
+        self.btn_rrhh.clicked.connect(lambda: (self.splitter.setSizes([450, 550]), self.cambiarModulo(1, self.btn_rrhh)))
         self.toolbar.addWidget(self.btn_rrhh)
         
         self.btn_logistica = QPushButton("Logística")
         self.btn_logistica.setCursor(Qt.PointingHandCursor)
-        self.btn_logistica.clicked.connect(lambda: self.cambiarModulo(2, self.btn_logistica))
+        self.btn_logistica.clicked.connect(lambda: (self.splitter.setSizes([450, 550]), self.cambiarModulo(2, self.btn_logistica)))
         self.toolbar.addWidget(self.btn_logistica)
         
         self.btn_compras = QPushButton("Compras")
         self.btn_compras.setCursor(Qt.PointingHandCursor)
-        self.btn_compras.clicked.connect(lambda: self.cambiarModulo(3, self.btn_compras))
+        self.btn_compras.clicked.connect(lambda: (self.splitter.setSizes([450, 550]), self.cambiarModulo(3, self.btn_compras)))
         self.toolbar.addWidget(self.btn_compras)
         
         self.btn_ventas = QPushButton("Ventas")
         self.btn_ventas.setCursor(Qt.PointingHandCursor)
-        self.btn_ventas.clicked.connect(lambda: self.cambiarModulo(4, self.btn_ventas))
+        self.btn_ventas.clicked.connect(lambda: (self.splitter.setSizes([450, 550]), self.cambiarModulo(4, self.btn_ventas)))
         self.toolbar.addWidget(self.btn_ventas)
         
         self.btn_mantenimiento = QPushButton("Mantenimiento")
         self.btn_mantenimiento.setCursor(Qt.PointingHandCursor)
-        self.btn_mantenimiento.clicked.connect(lambda: self.cambiarModulo(5, self.btn_mantenimiento))
+        self.btn_mantenimiento.clicked.connect(lambda: (self.splitter.setSizes([450, 550]), self.cambiarModulo(5, self.btn_mantenimiento)))
         self.toolbar.addWidget(self.btn_mantenimiento)
         
         # Lista de botones para gestionar el estilo activo
@@ -343,7 +354,7 @@ class GestionWindow(QMainWindow):
         layout.addWidget(filter_frame)
         
         # Splitter para tabla y gráficos
-        splitter = QSplitter(Qt.Vertical)
+        self.splitter = QSplitter(Qt.Vertical)
         
         # Tabla de finanzas
         self.finanzas_table = QTableView()
@@ -360,7 +371,7 @@ class GestionWindow(QMainWindow):
         )
         self.finanzas_table.setModel(self.finanzas_model)
         
-        splitter.addWidget(self.finanzas_table)
+        self.splitter.addWidget(self.finanzas_table)
         
         # Frame para gráficos
         charts_frame = QFrame()
@@ -374,12 +385,12 @@ class GestionWindow(QMainWindow):
         self.finanzas_pie_chart = GenericChart(width=4, height=4)
         charts_layout.addWidget(self.finanzas_pie_chart, 0, 1)
         
-        splitter.addWidget(charts_frame)
+        self.splitter.addWidget(charts_frame)
         
         # Configurar tamaños iniciales
-        splitter.setSizes([400, 400])
+        self.splitter.setSizes([400, 400])
         
-        layout.addWidget(splitter)
+        layout.addWidget(self.splitter)
         
         self.stacked_widget.addWidget(finanzas_widget)
         
