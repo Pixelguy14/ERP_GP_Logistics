@@ -586,10 +586,11 @@ class ComprasWindow(QMainWindow):
 
         # Logo
         logo_label = QLabel()
-        logo_pixmap = QPixmap("Logo-Grupo-Porteo.png")
+        logo_pixmap = QPixmap("Logo-Grupo-Porteo-White.png")
         if not logo_pixmap.isNull():
             logo_pixmap = logo_pixmap.scaled(40, 40, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             logo_label.setPixmap(logo_pixmap)
+        logo_label.setStyleSheet("background-color: transparent; border: none;")
         self.toolbar.addWidget(logo_label)
 
         # Título

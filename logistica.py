@@ -734,18 +734,18 @@ class LogisticaWindow(QMainWindow):
 
         # Sección de Pedidos en Proceso
         pedidos_frame = QFrame()
-        pedidos_frame.setFrameShape(QFrame.StyledPanel)
-        pedidos_frame.setStyleSheet("background-color: #d8d4d4;border-radius: 4px;")
+        pedidos_frame.setStyleSheet("background-color: white; border-radius: 4px;")
         pedidos_layout = QVBoxLayout(pedidos_frame)
 
-        self.lbl_pedidos = QLabel("Pedidos en Proceso")
-        self.lbl_pedidos.setStyleSheet("font-size: 16px; font-weight: bold;")
-        pedidos_layout.addWidget(self.lbl_pedidos)
+        lbl_pedidos = QLabel("Pedidos en Proceso")
+        lbl_pedidos.setStyleSheet("font-size: 16px; font-weight: bold; color: #333; padding: 10px;")
+        pedidos_layout.addWidget(lbl_pedidos)
 
         self.table_pedidos = QTableView()
+        self.table_pedidos.setStyleSheet("border: none;") # Estilo consistente con el segundo código
         self.table_pedidos.setAlternatingRowColors(True)
         self.table_pedidos.setSelectionBehavior(QTableView.SelectRows)
-        self.model_pedidos = LogisticaTableModel()  # Reutilizamos el modelo existente
+        self.model_pedidos = LogisticaTableModel()
         
         self.table_pedidos.setModel(self.model_pedidos)
         pedidos_layout.addWidget(self.table_pedidos)
@@ -754,49 +754,43 @@ class LogisticaWindow(QMainWindow):
 
         # Sección de Reportes Mensuales
         reportes_frame = QFrame()
-        reportes_frame.setFrameShape(QFrame.StyledPanel)
-        reportes_frame.setStyleSheet("background-color: #d8d4d4;border-radius: 4px;")
-        # Use a distinct name for the layout inside reportes_frame
+        reportes_frame.setStyleSheet("background-color: white; border-radius: 4px;") # Estilo consistente
         monthly_report_frame_layout = QVBoxLayout(reportes_frame)
 
-        self.lbl_reportes = QLabel("Reporte Mensual")
-        self.lbl_reportes.setStyleSheet("font-size: 16px; font-weight: bold;")
-        monthly_report_frame_layout.addWidget(self.lbl_reportes) # Se añade a su propio layout
+        lbl_reportes = QLabel("Reporte Mensual")
+        lbl_reportes.setStyleSheet("font-size: 16px; font-weight: bold; color: #333; padding: 10px;") # Estilo consistente
+        monthly_report_frame_layout.addWidget(lbl_reportes)
 
         # Controles de fecha
         fecha_panel = QHBoxLayout()
         self.date_edit_mes = QDateEdit()
         self.date_edit_mes.setDisplayFormat("MM/yyyy")
         self.date_edit_mes.setDate(QDate.currentDate())
-        self.date_edit_mes.setStyleSheet("""
-            QDateEdit {
-                padding: 5px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-        """)
+        # Eliminado el estilo inline en QDateEdit para mantener la consistencia con el segundo código
+        
         self.btn_generar_reporte = QPushButton("Generar Reporte")
-        self.btn_generar_reporte.setStyleSheet("font-size: 12px; font-weight: bold;background-color: #3156A1;")
+        self.btn_generar_reporte.setStyleSheet("background-color: #4CAF50; color: white; font-weight: bold;") # Estilo consistente
         self.btn_generar_reporte.clicked.connect(lambda: self.generarReporteMensual(usu_id))
 
 
-        fecha_panel.addWidget(QLabel("Seleccione mes:"))
+        fecha_panel.addWidget(QLabel("Mes:")) # Etiqueta más concisa
         fecha_panel.addWidget(self.date_edit_mes)
         fecha_panel.addWidget(self.btn_generar_reporte)
         fecha_panel.addStretch()
-        monthly_report_frame_layout.addLayout(fecha_panel) # Se añade a su propio layout
+        monthly_report_frame_layout.addLayout(fecha_panel)
 
 
         self.table_reporte = QTableView()
+        self.table_reporte.setStyleSheet("border: none;") # Estilo consistente
         self.table_reporte.setAlternatingRowColors(True)
         self.model_reporte = QStandardItemModel()
         self.model_reporte.setHorizontalHeaderLabels(["Origen", "Destino", "Fecha Salida"])
         self.table_reporte.setModel(self.model_reporte)
-        monthly_report_frame_layout.addWidget(self.table_reporte) # Se añade a su propio layout
+        monthly_report_frame_layout.addWidget(self.table_reporte)
 
         splitter_reportes.addWidget(reportes_frame)
 
-        splitter_reportes.setSizes([300, 300])
+        splitter_reportes.setSizes([300, 300]) # Ajuste si necesitas más secciones
         main_report_view_layout.addWidget(splitter_reportes)
 
         self.stacked_widget.addWidget(reportes_view_widget)

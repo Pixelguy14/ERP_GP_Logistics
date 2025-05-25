@@ -13,6 +13,9 @@ import os
 from finanzas import *
 from recursoshumanos import *
 from logistica import *
+from compras import *
+from ventas import *
+from mantenimiento import *
 from gestion import *
 
 class LoginWindow(QWidget):
@@ -203,10 +206,16 @@ class LoginWindow(QWidget):
                     self.Logistica_window = LogisticaWindow(self, usu_id)
                     self.Logistica_window.show()
                 elif resultado["usu_mod"] == "Compras":
+                    self.Compras_window = ComprasWindow(self,usu_id)
+                    self.Compras_window.show()
                     print("interfaz de Compras")
                 elif resultado["usu_mod"] == "Ventas":
+                    self.Ventas_window = VentasWindow(self,usu_id)
+                    self.Ventas_window.show()
                     print("interfaz de Ventas")
                 elif resultado["usu_mod"] == "Mantenimiento":
+                    self.Mantenimiento_window = MantenimientoWindow(self,usu_id)
+                    self.Mantenimiento_window.show()
                     print("interfaz de Mantenimiento")
                 elif resultado["usu_mod"] == "Gestion":
                     print("interfaz de Gestion")

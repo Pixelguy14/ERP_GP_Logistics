@@ -20,12 +20,6 @@ import mysql.connector
 from dotenv import load_dotenv
 from login import *
 import os
-# DEBUG AND TESTING
-from finanzas import *
-from recursoshumanos import *
-from logistica import *
-from compras import *
-from gestion import *
 
 load_dotenv()
 """
@@ -64,12 +58,5 @@ finally:
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     login_window = LoginWindow()
-    #login_window.show()
-
-    #test_window = FinanzasWindow(login_window, 1)
-    #test_window = RRHHWindow(login_window, 2)
-    #test_window = LogisticaWindow(login_window, 3)
-    test_window = ComprasWindow(login_window, 4)
-    #test_window = GestionWindow(login_window)
-    test_window.show()
+    login_window.show()
     sys.exit(app.exec_())
