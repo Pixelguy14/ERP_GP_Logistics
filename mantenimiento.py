@@ -431,7 +431,7 @@ class MantenimientoWindow(QMainWindow):
         
         self.btn_incidencia = QPushButton("Gestion de Incidencias")
         self.btn_incidencia.setCursor(Qt.PointingHandCursor)
-        self.btn_incidencia.clicked.connect(lambda: (self.stacked_widget.setCurrentIndex(1), self.loadDataIncidencia(usu_id)))
+        self.btn_incidencia.clicked.connect(lambda: (self.stacked_widget.setCurrentIndex(1), self.loadDataIncidencia(usu_id['usu_id'])))
         self.toolbar.addWidget(self.btn_incidencia)
         
         self.toolbar.addSeparator()
@@ -543,7 +543,7 @@ class MantenimientoWindow(QMainWindow):
         button_panel.addWidget(self.new_incidencia)
 
         refresh_action = QPushButton(QIcon.fromTheme("view-refresh"), "Actualizar", self)
-        refresh_action.clicked.connect(lambda: self.loadDataIncidencia(usu_id))
+        refresh_action.clicked.connect(lambda: self.loadDataIncidencia(usu_id['usu_id']))
         button_panel.addWidget(refresh_action)
         button_panel.addStretch()
 
@@ -627,6 +627,7 @@ class MantenimientoWindow(QMainWindow):
         try:
             cursor = self.db_connection.cursor()
             query = """SELECT * FROM incidencia WHERE inc_usu_id=%s ORDER BY inc_fecha DESC"""
+            
             cursor.execute(query, (usu_id, ))
             self.incidencia_data = cursor.fetchall()
             # Actualizamos los datos de la tabla
