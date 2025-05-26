@@ -192,29 +192,29 @@ class LoginWindow(QWidget):
                 if resultado["usu_mod"] == "Finanzas":
                     print("interfaz de Finanzas")
                     #print("Creando instancia de FinanzasWindow...")
-                    self.finanzas_window = FinanzasWindow(self, usu_id)
+                    self.finanzas_window = FinanzasWindow(self, usu_id['usu_id'])
                     #print("Aplicando atributos...")
                     self.finanzas_window.setAttribute(Qt.WA_DeleteOnClose, False)  # Evita que se elimine automáticamente
                     #print("Mostrando ventana...")
                     self.finanzas_window.show()
                 elif resultado["usu_mod"] == "Recursos Humanos":
                     print("interfaz de Recursos Humanos")
-                    self.RRHH_window = RRHHWindow(self, usu_id)
+                    self.RRHH_window = RRHHWindow(self, usu_id['usu_id'])
                     self.RRHH_window.show()
                 elif resultado["usu_mod"] == "Logistica":
                     print("interfaz de Logistica")
-                    self.Logistica_window = LogisticaWindow(self, usu_id)
+                    self.Logistica_window = LogisticaWindow(self, usu_id['usu_id'])
                     self.Logistica_window.show()
                 elif resultado["usu_mod"] == "Compras":
-                    self.Compras_window = ComprasWindow(self,usu_id)
+                    self.Compras_window = ComprasWindow(self, usu_id['usu_id'])
                     self.Compras_window.show()
                     print("interfaz de Compras")
                 elif resultado["usu_mod"] == "Ventas":
-                    self.Ventas_window = VentasWindow(self,usu_id)
+                    self.Ventas_window = VentasWindow(self, usu_id['usu_id'])
                     self.Ventas_window.show()
                     print("interfaz de Ventas")
                 elif resultado["usu_mod"] == "Mantenimiento":
-                    self.Mantenimiento_window = MantenimientoWindow(self,usu_id)
+                    self.Mantenimiento_window = MantenimientoWindow(self, usu_id['usu_id'])
                     self.Mantenimiento_window.show()
                     print("interfaz de Mantenimiento")
                 elif resultado["usu_mod"] == "Gestion":
